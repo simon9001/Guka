@@ -306,6 +306,7 @@ main {
 .gallery-grid {
   display: grid;
   gap: 10px;
+  padding: 20px 0;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(2, 200px);
   align-items: stretch;
@@ -948,4 +949,360 @@ footer {
 .navbar-nav li a.active {
     color: var(--green);
     font-weight: 600;
+}
+
+
+
+
+
+
+
+
+
+
+/* =============== TRIBUTE FORM STYLING =============== */
+
+/* Form container */
+#tributeForm {
+  padding: 25px;
+  background: var(--green-light);
+  border-radius: 12px;
+  border: 1px solid rgba(46, 125, 50, 0.2);
+  margin-top: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+#tributeForm h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: var(--dark-green);
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  border-bottom: 2px solid var(--gold);
+  padding-bottom: 10px;
+}
+
+#tributeForm .muted {
+  margin-bottom: 20px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Row layout for form inputs */
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+/* Input and textarea styling */
+input, textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 10px;
+  border: 2px solid rgba(46, 125, 50, 0.3);
+  background: var(--white);
+  color: #04202a;
+  font-family: inherit;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.2);
+  background: var(--white);
+}
+
+input::placeholder, textarea::placeholder {
+  color: #666;
+  opacity: 0.8;
+}
+
+/* Textarea specific */
+textarea {
+  min-height: 120px;
+  resize: vertical;
+  line-height: 1.5;
+  padding: 16px;
+}
+
+/* Button container */
+#tributeForm > div:last-child {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+/* Form buttons */
+#tributeForm .btn {
+  flex: 1;
+  padding: 14px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+#tributeForm .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(46, 125, 50, 0.3);
+}
+
+#tributeForm .ghost {
+  background: transparent;
+  color: var(--green);
+  border: 2px solid var(--green);
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#tributeForm .ghost:hover {
+  background: var(--green);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+
+/* Form validation styles */
+input:invalid, textarea:invalid {
+  border-color: #ff6b6b;
+}
+
+input:valid, textarea:valid {
+  border-color: #51cf66;
+}
+
+/* Loading state */
+#submitTribute:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* Success message */
+.form-success {
+  background: #51cf66;
+  color: white;
+  padding: 15px;
+  border-radius: 10px;
+  margin-top: 15px;
+  text-align: center;
+  display: none;
+}
+
+.form-success.show {
+  display: block;
+  animation: fadeIn 0.5s ease;
+}
+
+/* Form label style (if you add labels later) */
+.form-label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--dark-green);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* Character counter */
+.char-counter {
+  text-align: right;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 5px;
+}
+
+.char-counter.warning {
+  color: #ff6b6b;
+}
+
+/* Responsive form adjustments */
+@media (max-width: 768px) {
+  #tributeForm {
+    padding: 20px;
+  }
+  
+  .row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  
+  input, textarea {
+    padding: 12px 14px;
+  }
+  
+  #tributeForm > div:last-child {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  #tributeForm .btn,
+  #tributeForm .ghost {
+    width: 100%;
+    padding: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  #tributeForm {
+    padding: 16px;
+  }
+  
+  #tributeForm h3 {
+    font-size: 1.3rem;
+  }
+  
+  input, textarea {
+    font-size: 14px;
+    padding: 10px 12px;
+  }
+}
+
+/* Tribute form in main content */
+#tributes.card {
+  padding: 25px;
+}
+
+#tributes .tribute-grid {
+  margin-bottom: 30px;
+}
+
+/* See More button styling */
+#tributes a.btn[href="tributes.html"] {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 12px 24px;
+  text-decoration: none;
+  border-radius: 10px;
+}
+
+/* Additional form enhancements */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group:last-child {
+  margin-bottom: 0;
+}
+
+/* Required field indicator */
+.required::after {
+  content: " *";
+  color: #ff6b6b;
+}
+
+/* Form field focus animations */
+@keyframes inputFocus {
+  from { transform: scale(1); }
+  to { transform: scale(1.01); }
+}
+
+input:focus, textarea:focus {
+  animation: inputFocus 0.2s ease;
+}
+
+/* Form error message */
+.error-message {
+  color: #ff6b6b;
+  font-size: 0.85rem;
+  margin-top: 5px;
+  display: none;
+}
+
+.error-message.show {
+  display: block;
+}
+
+/* Form submit animation */
+@keyframes submitPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+#submitTribute.clicked {
+  animation: submitPulse 0.3s ease;
+}
+
+/* Tribute form on all tributes page */
+#tributeForm.card {
+  background: var(--white);
+  border-left: 5px solid var(--gold);
+  margin-top: 30px;
+}
+
+#tributeForm.card h3 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+/* Additional spacing for form in tributes page */
+#tributeForm {
+  margin-bottom: 40px;
+}
+
+/* Smooth transition for form elements */
+input, textarea, button {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Enhanced hover effects for form buttons */
+#tributeForm .btn::after,
+#tributeForm .ghost::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.6s ease;
+}
+
+#tributeForm .btn:hover::after,
+#tributeForm .ghost:hover::after {
+  left: 100%;
+}
+
+/* Form container shadow on hover */
+#tributeForm:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Form field icons (optional) */
+.form-field {
+  position: relative;
+}
+
+.form-field i {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+}
+
+.form-field input {
+  padding-left: 40px;
+}
+
+/* Custom focus styles for better accessibility */
+input:focus-visible,
+textarea:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
 }
