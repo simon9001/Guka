@@ -3,20 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Tributes | Linus Memorial</title>
+    <title>All Tributes | Harison Kibuu Memorial</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="images\WhatsApp Image 2025-12-10 at 12.40.45_a2d9d5af.jpg" />
 </head>
 <body>
-    <!-- Navigation -->
+    <!-- Navigation - Updated to match main page -->
     <nav class="navbar">
         <a href="index.html" class="navbar-brand">
-          <img src="imges/img1.png" alt="Linus Ngigi Karanja" class="navbar-pic">
-          <span>Linus Ngigi Karanja</span>
+          <img src="images\WhatsApp Image 2025-12-10 at 12.40.45_a2d9d5af.jpg" alt="Harison Kibuu Muchiri" class="navbar-pic">
+          <span>Harison Kibuu Muchiri</span>
         </a>
       
         <ul class="navbar-nav" id="navMenu">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="tributes.html">Tributes</a></li>
+          <li><a href="index.html#life">Life Story</a></li>
+          <li><a href="index.html#gallery">Gallery</a></li>
+          <li><a href="tributes.html" class="active">Tributes</a></li>
+          <li><a href="index.html#program">Program</a></li>
+          <li><a href="index.html#map">Map</a></li>
         </ul>
       
         <!-- Candle -->
@@ -38,42 +42,47 @@
 
     <!-- Main Content -->
     <main>
-      <div class="card fade-in">
-          <h2 style="margin-top:0; text-align:center">Tributes in Memory of Linus</h2>
+      <div class="card fade-in" style="max-width: 1200px; margin: 0 auto;">
+          <h2 style="margin-top:0; text-align:center">Tributes in Memory of Harison Kibuu Muchiri</h2>
           <p class="muted" style="text-align:center">Read all the loving words, prayers, and memories shared by family and friends.</p>
           
           <div class="top-actions">
-              <a href="index.html" class="btn">Back to Home</a>
-              <a href="#tributeForm" class="btn">Leave a Tribute</a>
+              <a href="index.html" class="btn">← Back to Home</a>
+              <a href="#tributeForm" class="btn">+ Leave a Tribute</a>
           </div>
           
-          <!-- CHANGE THIS: Use tributeList instead of tributeGrid -->
-          <div id="tributeList"></div>
+          <!-- Use tributeGrid instead of tributeList for consistent design -->
+          <div id="tributeGrid" class="tribute-grid" style="margin-top: 30px;"></div>
+          
+          <!-- Show message when no tributes -->
+          <div id="noTributesMessage" style="display: none; text-align: center; padding: 40px; color: var(--muted);">
+              <p>No tributes yet — be the first to share a memory.</p>
+          </div>
       </div>
       
       <!-- Tribute Form -->
-      <div id="tributes" class="card fade-in">
-          <h3>Leave Your Tribute</h3>
+      <div id="tributeForm" class="card fade-in" style="max-width: 1200px; margin: 30px auto 0;">
+          <h3 style="margin-top:0">Leave Your Tribute</h3>
           
-          <p class="muted">Share your loving words, prayers, and memories in honor of Linus.</p>
-          <form id="tributeForm" method="POST" data-netlify="true" onsubmit="return false;">
-              <div class="row" style="margin-bottom:8px">
-                  <input id="name" placeholder="Your name">
+          <p class="muted">Share your loving words, prayers, and memories in honor of Harison Kibuu.</p>
+          <form method="POST" data-netlify="true" onsubmit="return false;">
+              <div class="row" style="margin-bottom:15px">
+                  <input id="name" placeholder="Your name" required>
                   <input id="relation" placeholder="Relationship (e.g., cousin, friend)">
               </div>
-              <textarea id="message" placeholder="Write your tribute..."></textarea>
-              <div style="display:flex; gap:8px; margin-top:8px">
+              <textarea id="message" placeholder="Write your tribute..." required minlength="10"></textarea>
+              <div style="display:flex; gap:12px; margin-top:15px">
                   <button id="submitTribute" class="btn" type="button">Post Tribute</button>
-                  <button id="clearAll" class="ghost" type="button">Clear Tributes</button>
+                  <button id="clearLocal" class="ghost" type="button">Clear Local Storage</button>
               </div>
           </form>
       </div>
   </main>
 
   <footer>
-      <p>In Loving Memory of Linus</p>
+      <small>In Loving Memory of Harison Kibuu Muchiri • made by sikasolutions • call +254 757568845</small>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="scriptt.js"></script>
 </body>
 </html>

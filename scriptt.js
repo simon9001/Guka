@@ -3,9 +3,8 @@ const form = document.getElementById('tributeForm');
 const nameInput = document.getElementById('name');
 const relationInput = document.getElementById('relation');
 const messageInput = document.getElementById('message');
-const list = document.getElementById('tributeList');
 const submit = document.getElementById('submitTribute');
-const clearAll = document.getElementById('clearAll');
+const clearLocal = document.getElementById('clearLocal');
 
 // ✅ Your live Google Apps Script Web App URL (must end with /exec)
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwQcs--tXnGIDnBj3chxePXcnEQB7ww_9bjLMkrrm5FYPuRyQ5fwYAmhSdW3A37qyy15g/exec';
@@ -26,25 +25,47 @@ function saveTributes(arr) {
 }
 
 function escapeHtml(s) {
+  if (!s) return '';
   return (s + '').replace(/[&<>"']/g, c => (
     { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
   ));
 }
 
-// ----------------- Tribute Grid Display -----------------
+function formatDate(timestamp) {
+  if (!timestamp) return '';
+  const date = new Date(timestamp);
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+  });
+}
+
+// ----------------- Enhanced Tribute Grid Display -----------------
 function renderTributeGrid(tributes = loadTributes()) {
   const grid = document.getElementById('tributeGrid');
-  if (!grid) return; // Only run on pages with tribute grid
+  const noTributesMessage = document.getElementById('noTributesMessage');
+  
+  // If no grid on page, return
+  if (!grid) return;
   
   grid.innerHTML = '';
   
-  if (!tributes.length) {
-    grid.innerHTML = '<p class="muted">No tributes yet — be the first to share a memory.</p>';
+  if (!tributes || !tributes.length) {
+    if (noTributesMessage) noTributesMessage.style.display = 'block';
+    grid.innerHTML = '<p class="muted" style="text-align:center; padding: 40px;">No tributes yet — be the first to share a memory.</p>';
     return;
   }
+  
+  if (noTributesMessage) noTributesMessage.style.display = 'none';
 
-  // Show only the first 4 tributes
-  const displayTributes = tributes.slice(-4).reverse();
+  // Show ALL tributes on tributes page, only 4 on home page
+  const isTributesPage = window.location.pathname.includes('tributes.html');
+  const displayTributes = isTributesPage ? 
+    tributes.slice().reverse() : // All tributes on tributes page
+    tributes.slice(-4).reverse(); // First 4 tributes on home page
   
   displayTributes.forEach(t => {
     const el = document.createElement('div');
@@ -52,24 +73,31 @@ function renderTributeGrid(tributes = loadTributes()) {
     el.dataset.uuid = t.uuid || '';
     el.dataset.id = t.id || '';
 
+    const name = escapeHtml(t.name || 'Anonymous');
+    const relation = escapeHtml(t.relation || 'Friend');
+    const message = escapeHtml(t.message);
+    const date = formatDate(t.ts);
+    const canDelete = t.uuid === userUUID;
+
     el.innerHTML = `
       <div class="tribute-header">
         <div>
-          <div class="tribute-name">${escapeHtml(t.name || 'Anonymous')}</div>
-          <div class="tribute-relation">${escapeHtml(t.relation || '')}</div>
+          <div class="tribute-name">${name}</div>
+          <div class="tribute-relation">${relation}</div>
         </div>
-        ${t.uuid === userUUID ? '<button class="delete-btn">Delete</button>' : ''}
+        ${canDelete ? '<button class="delete-btn" title="Delete tribute">✕</button>' : ''}
       </div>
-      <div class="tribute-message">${escapeHtml(t.message)}</div>
+      <div class="tribute-message">${message}</div>
       <div class="tribute-footer">
-        <small class="tribute-date">${t.ts ? new Date(t.ts).toLocaleDateString() : ''}</small>
+        <small class="tribute-date">${date}</small>
       </div>`;
 
     grid.appendChild(el);
 
-    if (t.uuid === userUUID) {
-      el.querySelector('.delete-btn').addEventListener('click', async () => {
-        if (confirm('Delete your tribute?')) {
+    if (canDelete) {
+      el.querySelector('.delete-btn').addEventListener('click', async (e) => {
+        e.stopPropagation();
+        if (confirm('Are you sure you want to delete your tribute?')) {
           await deleteTribute(t.id, t.uuid);
           const updated = loadTributes().filter(x => x.id !== t.id);
           saveTributes(updated);
@@ -80,12 +108,14 @@ function renderTributeGrid(tributes = loadTributes()) {
   });
 }
 
+// ----------------- Legacy Tribute List Display (if needed) -----------------
 function renderTributes(tributes = loadTributes()) {
-  if (!list) return; // Only run on pages with tribute list
+  const list = document.getElementById('tributeList');
+  if (!list) return;
   
   list.innerHTML = '';
   if (!tributes.length) {
-    list.innerHTML = '<p class="muted">No tributes yet — be the first to share a memory.</p>';
+    list.innerHTML = '<p class="muted" style="text-align:center">No tributes yet — be the first to share a memory.</p>';
     return;
   }
 
@@ -98,7 +128,7 @@ function renderTributes(tributes = loadTributes()) {
     el.innerHTML = `
       <strong>${escapeHtml(t.name || 'Anonymous')}</strong>
       <small>• ${escapeHtml(t.relation || '')}</small>
-      <div style="margin-top:6px">${escapeHtml(t.message)}</div>
+      <div style="margin-top:8px">${escapeHtml(t.message)}</div>
       ${t.uuid === userUUID ? '<button class="delete-btn">Delete</button>' : ''}
       <small class="muted">${t.ts ? new Date(t.ts).toLocaleString() : ''}</small>`;
 
@@ -126,21 +156,21 @@ async function submitToWebApp(name, relation, message) {
   }
 
   const formData = new URLSearchParams();
-  formData.append('name', name);
-  formData.append('relation', relation);
+  formData.append('name', name || 'Anonymous');
+  formData.append('relation', relation || 'Friend');
   formData.append('message', message);
   formData.append('uuid', userUUID);
   formData.append('ts', Date.now());
 
   try {
-    submit.disabled = true;
+    if (submit) submit.disabled = true;
     const res = await fetch(SCRIPT_URL, {
       method: 'POST',
       body: formData
     });
 
     const data = await res.json();
-    submit.disabled = false;
+    if (submit) submit.disabled = false;
 
     if (data.status === 'success') return data.id;
 
@@ -148,7 +178,7 @@ async function submitToWebApp(name, relation, message) {
     return null;
 
   } catch (err) {
-    submit.disabled = false;
+    if (submit) submit.disabled = false;
     alert('Network or CORS error. Make sure the Apps Script is deployed and accessible.');
     console.error(err);
     return null;
@@ -157,7 +187,6 @@ async function submitToWebApp(name, relation, message) {
 
 // ----------------- DELETE tribute -----------------
 async function deleteTribute(id) {
-  // only need id and uuid
   const payload = new FormData();
   payload.append('deleteId', id);
   payload.append('uuid', userUUID);
@@ -170,11 +199,14 @@ async function deleteTribute(id) {
 
     if (data.status === 'deleted') {
       console.log(`Deleted tribute with id ${id}`);
+      return true;
     } else {
       console.warn('Delete failed or not found', id);
+      return false;
     }
   } catch (err) {
     console.error('Error deleting tribute:', err);
+    return false;
   }
 }
 
@@ -184,13 +216,12 @@ async function loadAllTributes() {
     const res = await fetch(SCRIPT_URL);
     const json = await res.json();
 
-    // Expect { status: 'success', data: [...] }
     const tributes = json?.data || [];
     saveTributes(tributes);
     return tributes;
   } catch (err) {
-    console.error('Error loading tributes:', err);
-    return loadTributes();
+    console.error('Error loading tributes from server:', err);
+    return loadTributes(); // Fallback to local storage
   }
 }
 
@@ -202,16 +233,24 @@ function setupFormHandlers() {
     const relation = relationInput?.value.trim();
     const message = messageInput?.value.trim();
 
-    if (!message) {
-      alert('Please write a short tribute.');
-      messageInput.focus();
+    if (!message || message.length < 10) {
+      alert('Please write a meaningful tribute (at least 10 characters).');
+      messageInput?.focus();
       return;
     }
 
     const id = await submitToWebApp(name, relation, message);
     if (!id) return;
 
-    const tribute = { id, name, relation, message, ts: Date.now(), uuid: userUUID };
+    const tribute = { 
+      id, 
+      name: name || 'Anonymous', 
+      relation: relation || 'Friend', 
+      message, 
+      ts: Date.now(), 
+      uuid: userUUID 
+    };
+    
     const arr = loadTributes();
     arr.push(tribute);
     saveTributes(arr);
@@ -223,34 +262,44 @@ function setupFormHandlers() {
     if (nameInput) nameInput.value = '';
     if (relationInput) relationInput.value = '';
     if (messageInput) messageInput.value = '';
+    
+    // Show success message
+    alert('Thank you for sharing your tribute!');
+    
+    // Scroll to top of tributes
+    setTimeout(() => {
+      const grid = document.getElementById('tributeGrid');
+      if (grid) grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
   });
 
   // Clear all locally cached tributes
-  clearAll?.addEventListener('click', () => {
-    if (confirm('Clear all tributes stored locally?')) {
+  clearLocal?.addEventListener('click', () => {
+    if (confirm('This will clear all tributes stored locally on your device. Continue?')) {
       localStorage.removeItem('tributes_v1');
-      initializePage();
+      location.reload();
     }
   });
 }
 
 // ----------------- Page-specific rendering -----------------
 function initializePage() {
-  const tributeGrid = document.getElementById('tributeGrid');
-  const tributeList = document.getElementById('tributeList');
+  // Always use tribute grid for both pages for consistency
+  renderTributeGrid();
   
-  if (tributeGrid) {
-    // This is the home page with grid view
-    renderTributeGrid();
-  } else if (tributeList) {
-    // This is the tribute page with full list
-    renderTributes();
+  // Also update tribute count on home page if needed
+  const seeMoreBtn = document.querySelector('a[href="tributes.html"]');
+  if (seeMoreBtn) {
+    const tributes = loadTributes();
+    if (tributes.length > 4) {
+      seeMoreBtn.innerHTML = `See All ${tributes.length} Tributes →`;
+    }
   }
 }
 
 // ----------------- Initialize based on page -----------------
 document.addEventListener('DOMContentLoaded', async function() {
-  // Load all tributes from server
+  // Load all tributes from server first
   await loadAllTributes();
   
   // Then initialize the appropriate view
@@ -303,10 +352,8 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     function buildPages() {
       perPage = calcPerPage();
-      // keep a reference to which logical index we were showing
       const visibleStartIndex = currentPage * perPage;
 
-      // clear container and rebuild pages by chunking originalThumbs
       container.innerHTML = '';
       pages = [];
       for (let i = 0; i < originalThumbs.length; i += perPage) {
@@ -314,7 +361,6 @@ document.addEventListener('DOMContentLoaded', async function() {
         page.className = 'gallery-page';
         const grid = document.createElement('div');
         grid.className = 'gallery-grid';
-        // append up to perPage thumbs
         const slice = originalThumbs.slice(i, i + perPage);
         slice.forEach(t => grid.appendChild(t));
         page.appendChild(grid);
@@ -322,7 +368,6 @@ document.addEventListener('DOMContentLoaded', async function() {
         pages.push(page);
       }
 
-      // clamp currentPage and scroll there
       currentPage = Math.min(Math.floor(visibleStartIndex / perPage), Math.max(0, pages.length - 1));
       requestAnimationFrame(() => {
         container.scrollTo({ left: currentPage * container.clientWidth, behavior: 'auto' });
@@ -332,7 +377,6 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
 
     function attachThumbHandlers() {
-      // attach click to each thumb image (these elements are reused)
       const imgs = container.querySelectorAll('.thumb img');
       imgs.forEach(img => {
         img.onclick = () => {
@@ -341,7 +385,6 @@ document.addEventListener('DOMContentLoaded', async function() {
       });
     }
 
-    // Auto slide functions
     function startAutoSlide() {
       if (isPaused || pages.length <= 1) return;
       stopAutoSlide();
@@ -355,7 +398,6 @@ document.addEventListener('DOMContentLoaded', async function() {
       autoSlide = null;
     }
 
-    // pause/resume helpers (used for manual scroll)
     function pauseThenResume() {
       stopAutoSlide();
       clearTimeout(resumeTimer);
@@ -364,7 +406,6 @@ document.addEventListener('DOMContentLoaded', async function() {
       }, 3000);
     }
 
-    // scroll listener to update page index and pause/resume
     container.addEventListener('scroll', () => {
       clearTimeout(container._scrollTimeout);
       stopAutoSlide();
@@ -377,7 +418,6 @@ document.addEventListener('DOMContentLoaded', async function() {
     container.addEventListener('wheel', () => { pauseThenResume(); }, { passive: true });
     container.addEventListener('touchstart', () => { pauseThenResume(); }, { passive: true });
 
-    // lightbox open/close
     function openLightbox(imgEl) {
       if (!lightbox || !lightboxImg) return;
       isPaused = true;
@@ -385,20 +425,19 @@ document.addEventListener('DOMContentLoaded', async function() {
       lightboxImg.src = imgEl.src;
       lightboxImg.alt = imgEl.alt || '';
       lightbox.classList.add('show');
+      document.body.style.overflow = 'hidden';
     }
 
     function closeLightbox() {
       if (!lightbox) return;
       lightbox.classList.remove('show');
+      document.body.style.overflow = '';
       isPaused = false;
-      // small delay to prevent immediate auto scroll while closing animation
       setTimeout(() => startAutoSlide(), 250);
     }
 
-    // lightbox close handlers
     if (lightbox) {
       lightbox.addEventListener('click', (e) => {
-        // close if clicking outside the image or on the image
         if (e.target === lightbox || e.target === lightboxImg) {
           closeLightbox();
         }
@@ -408,30 +447,22 @@ document.addEventListener('DOMContentLoaded', async function() {
       });
     }
 
-    // responsive rebuild with debounce
     let resizeTimer;
     window.addEventListener('resize', () => {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(() => {
         const oldPer = perPage;
         perPage = calcPerPage();
-        // rebuild pages only if per-page count changes
         if (perPage !== oldPer) {
           buildPages();
         } else {
-          // still ensure pages width corrected (in case of width change)
           container.scrollTo({ left: currentPage * container.clientWidth, behavior: 'auto' });
         }
       }, 220);
     });
 
-    // initial build + start auto
     buildPages();
     startAutoSlide();
-
-    // expose a manual stop (useful for debugging)
-    window.__galleryStop = stopAutoSlide;
-    window.__galleryStart = startAutoSlide;
   }
 
   // ------------------ Farewell canvas (petals) ------------------
@@ -476,16 +507,15 @@ document.addEventListener('DOMContentLoaded', async function() {
   // ----------------- Language Switch -----------------
   const switchBtn = document.getElementById('langSwitch');
   if (switchBtn) {
-    let isKikuyu = false; // default language = English
+    let isKikuyu = false;
 
-    // when clicked, toggle between English and Kikuyu
     switchBtn.addEventListener('click', () => {
       isKikuyu = !isKikuyu;
       switchBtn.textContent = isKikuyu ? 'Change to English' : 'Change to Kikuyu';
 
       document.querySelectorAll('.timeline, .mutes, .muted').forEach(p => {
         const text = isKikuyu ? p.dataset.ki : p.dataset.en;
-        if (text) p.innerHTML = text; // ✅ changed from textContent to innerHTML
+        if (text) p.innerHTML = text;
       });
     });
   }
@@ -498,36 +528,57 @@ document.addEventListener('DOMContentLoaded', async function() {
     toggle.addEventListener("click", () => {
       menu.classList.toggle("open");
     });
+
+    // Close menu when clicking on links
+    menu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        menu.classList.remove('open');
+      });
+    });
   }
+
+  // Highlight active nav link
+  const currentPage = window.location.pathname;
+  const navLinks = document.querySelectorAll('.navbar-nav a');
+  navLinks.forEach(link => {
+    if (link.getAttribute('href') === currentPage || 
+        (currentPage.includes('tributes.html') && link.getAttribute('href').includes('tributes'))) {
+      link.classList.add('active');
+    }
+  });
 });
 
 // ----------------- Download Handler -----------------
 function showDownloadMessage(event) {
-  event.preventDefault(); // Stop immediate download
+  event.preventDefault();
   const link = event.currentTarget;
   const progressContainer = document.getElementById('downloadProgress');
   const fill = document.querySelector('.progress-fill');
 
-  // Show progress bar
-  progressContainer.style.display = 'block';
-  fill.style.width = '0%';
+  if (progressContainer) {
+    progressContainer.style.display = 'block';
+    fill.style.width = '0%';
+  }
   
-  // Show alert to user
   alert('Your download is starting...\n\nPlease keep this page open.');
 
-  // Animate progress bar
-  setTimeout(() => fill.style.width = '100%', 100);
+  if (fill) setTimeout(() => fill.style.width = '100%', 100);
 
-  // Simulate download delay
   setTimeout(() => {
-    // Trigger actual download
     const a = document.createElement('a');
     a.href = link.getAttribute('href');
     a.download = link.getAttribute('download');
     a.click();
 
-    // Notify user
     alert('✅ Download complete! Check your downloads folder.');
-    progressContainer.style.display = 'none';
+    if (progressContainer) progressContainer.style.display = 'none';
   }, 2500);
 }
+
+// Export functions for debugging
+window.tributeFunctions = {
+  loadTributes,
+  saveTributes,
+  renderTributeGrid,
+  loadAllTributes
+};
