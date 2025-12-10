@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Tributes | Linus Memorial</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="index.html" class="navbar-brand">
+          <img src="imges/img1.png" alt="Linus Ngigi Karanja" class="navbar-pic">
+          <span>Linus Ngigi Karanja</span>
+        </a>
+      
+        <ul class="navbar-nav" id="navMenu">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="tributes.html">Tributes</a></li>
+        </ul>
+      
+        <!-- Candle -->
+        <div class="candle-container">
+          <div class="candle">
+            <div class="candle-body"></div>
+            <div class="candle-flame"></div>
+          </div>
+          <span class="candle-label">Eternal Flame</span>
+        </div>
+      
+        <!-- Mobile Toggle -->
+        <button class="navbar-toggle" id="navbarToggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </nav>
+
+    <!-- Main Content -->
+    <main>
+      <div class="card fade-in">
+          <h2 style="margin-top:0; text-align:center">Tributes in Memory of Linus</h2>
+          <p class="muted" style="text-align:center">Read all the loving words, prayers, and memories shared by family and friends.</p>
+          
+          <div class="top-actions">
+              <a href="index.html" class="btn">Back to Home</a>
+              <a href="#tributeForm" class="btn">Leave a Tribute</a>
+          </div>
+          
+          <!-- CHANGE THIS: Use tributeList instead of tributeGrid -->
+          <div id="tributeList"></div>
+      </div>
+      
+      <!-- Tribute Form -->
+      <div id="tributes" class="card fade-in">
+          <h3>Leave Your Tribute</h3>
+          
+          <p class="muted">Share your loving words, prayers, and memories in honor of Linus.</p>
+          <form id="tributeForm" method="POST" data-netlify="true" onsubmit="return false;">
+              <div class="row" style="margin-bottom:8px">
+                  <input id="name" placeholder="Your name">
+                  <input id="relation" placeholder="Relationship (e.g., cousin, friend)">
+              </div>
+              <textarea id="message" placeholder="Write your tribute..."></textarea>
+              <div style="display:flex; gap:8px; margin-top:8px">
+                  <button id="submitTribute" class="btn" type="button">Post Tribute</button>
+                  <button id="clearAll" class="ghost" type="button">Clear Tributes</button>
+              </div>
+          </form>
+      </div>
+  </main>
+
+  <footer>
+      <p>In Loving Memory of Linus</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

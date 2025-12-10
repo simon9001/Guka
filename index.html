@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <!-- REMOVE or REPLACE the CSP line below -->
+  <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://script.google.com;"> -->
+  
+  <!-- Better CSP for development -->
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src * 'unsafe-inline' 'unsafe-eval';
+    script-src * 'unsafe-inline' 'unsafe-eval';
+    connect-src *;
+    style-src * 'unsafe-inline';
+    img-src * data:;
+  ">
+  
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Harison Kibuu Muchiri - In Loving Memory</title>
+  <link rel="icon" type="image/png" href="images\WhatsApp Image 2025-12-10 at 12.40.45_a2d9d5af.jpg" />
+  
+  <meta name="description" content="Digital memorial for Harison Kibuu Muchiri — a celebration of a life filled with grace, kindness, and love." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <nav class="navbar">
+    <a href="#" class="navbar-brand">
+      <img src="images\WhatsApp Image 2025-12-10 at 12.40.45_a2d9d5af.jpg" alt="Harison Kibuu Muchiri" class="navbar-pic">
+      <span>Harison Kibuu Muchiri</span>
+    </a>
+  
+    <ul class="navbar-nav" id="navMenu">
+      <li><a href="#life">Life Story</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#tributes">Tributes</a></li>
+      <li><a href="#program">Program</a></li>
+      <li><a href="#map">Map</a></li>
+    </ul>
+  
+    <!-- Candle -->
+    <div class="candle-container">
+      <div class="candle">
+        <div class="candle-body"></div>
+        <div class="candle-flame"></div>
+      </div>
+      <span class="candle-label">Eternal Flame</span>
+    </div>
+  
+    <!-- Mobile Toggle -->
+    <button class="navbar-toggle" id="navbarToggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <header class="memorial-header">
+    <!-- Background Video -->
+    <video autoplay muted loop playsinline class="background-video">
+      <source src="images\WhatsApp Video 2025-10-26 at 13.17.48_5ff9223c.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  
+    <!-- Content Overlay -->
+    <div class="header-content">
+      <h2 class="memory-title">In Loving Memory</h2>
+  
+      <div class="memorial-frame">
+        <img src="images\WhatsApp Image 2025-12-10 at 12.40.45_a2d9d5af.jpg" alt="Portrait of Harison Kibuu Muchiri" class="memorial-photo">
+  
+        <div class="flowers">
+          <img src="imges\Adobe Express - file (1).png" alt="flower" class="flower top-left">
+          <img src="imges/flower2.png" alt="flower" class="flower bottom-right">
+          <img src="imges/flower3.png" alt="flower" class="flower bottom-left">
+        </div>
+      </div>
+  
+      <div class="memorial-info">
+        <h1>Harison Kibuu Muchiri</h1>
+        <p class="dates">1958 - 01/12/2025</p>
+        <p class="lead">"I have fought the good fight, I have finished the race, and I have remained faithful." - 2 Timothy 4:7</p>
+      </div> 
+    </div>
+  </header>
+  
+
+  <main>
+    <section>
+
+      <div class="card hero fade-in">
+        
+        <div class="timeline" id="life">
+          <h3>Life Story</h3>
+          <div class="language-toggle">
+            <button id="langSwitch" class="btn small">Change to Kikuyu</button>
+          </div>
+          
+          <div class="event">
+            <h3 class="mutes" data-en="Birth" data-ki="Guciarwo">Birth</h3>
+            <p class="muted" data-en="The late Harison Kibuu was born in the year 1958 by his parents the late Muchiri Kabui and the late Monicah Wangui in Kimuri Village, Mwern Sub-Location, Giathugu Location, Mukurweini Sub-county, Nyeri County. He was the brother to Kabui Muchiri, Charles Waigera, Rose Waihtengeni Waigwa, Hannah Wairinun Ngure, the late Eunice Ndeti, the late Beatrice Wanja Munyiri and the late Rukenya Muchiri." 
+               data-ki="Mutigairi Harison Kibuu aciariroo mwakaini wa 1958 ni aciari ake Mutigairi Muchiri Kabui na Mutigairi Monicah Wangui ituraini ria Kimuri, Mwern Sub-Location, Giathugu Location, Mukurweini Sub-county, Nyeri county. Maciaraniroo na mutigairi Kabui Muchiri, Charles Waigera, Rose Waihtengeni Waigwa, Hannah Wairinun Ngure, Mutigairi Eunice Ndeti, Mwendwonirii Beatrice Wanja Munyiri na Mutigairi Rukenya Muchiri.">
+              The late Harison Kibuu was born in the year 1958 by his parents the late Muchiri Kabui and the late Monicah Wangui in Kimuri Village, Mwern Sub-Location, Giathugu Location, Mukurweini Sub-county, Nyeri County. He was the brother to Kabui Muchiri, Charles Waigera, Rose Waihtengeni Waigwa, Hannah Wairinun Ngure, the late Eunice Ndeti, the late Beatrice Wanja Munyiri and the late Rukenya Muchiri.
+            </p>
+          </div>
+
+          <div class="event">
+            <h3 class="mutes" data-en="Childhood" data-ki="Unini Wake">Childhood</h3>
+            <p class="muted" data-en="The late Harison Kibuu was raised well by his parents, just like the other children of those days. He was an obedient and hardworking child who used to help his parents in various tasks and chores at home."
+               data-ki="Mutigairi Harison Kibuu niaerriwoo eta ciana iria ingi cia hindi iyo ari mwana mwathiki na niateithagia mawira ngurani.">
+              The late Harison Kibuu was raised well by his parents, just like the other children of those days. He was an obedient and hardworking child who used to help his parents in various tasks and chores at home.
+            </p>
+          </div>
+          
+          <div class="event">
+            <h3 class="mutes" data-en="Education" data-ki="Githomo Giake">Education</h3>
+            <p class="muted" data-en="The late Harison Kibuu started his education at Ngamwa Primary School in the year 1963 and later transferred to Mwern Primary School where he completed his primary education in the year 1971. He later proceeded to Kaheti Polytechnic and undertook a Masonry course and later went to Thika and studied an Electrical course."
+               data-ki="Mutigairi Harison Kibuu ambiritie githomo giake cukurnini wa Ngamwa Primary School mwakaini wa 1963 na agicoka agithamira Mwern Primary School kuria arikirie githomo kia Primary mwakaini wa 1971. Thutha ucio niahire Kaheti Polytechnic na agithoma Masonry na agicoka agithi Thika agithomera wira wa thiima.">
+              The late Harison Kibuu started his education at Ngamwa Primary School in the year 1963 and later transferred to Mwern Primary School where he completed his primary education in the year 1971. He later proceeded to Kaheti Polytechnic and undertook a Masonry course and later went to Thika and studied an Electrical course.
+            </p>
+          </div>
+          
+          <div class="event">
+            <h3 class="mutes" data-en="Work" data-ki="Wira">Work</h3>
+            <p class="muted" data-en="When the late Harison Kibuu completed his studies, he was employed in the Ministry of Public Work Mombasa where he worked until his retirement. After his retirement, he went back home and started farming. He was a successful Coffee and Livestock farmer."
+               data-ki="Mutigairi Harison Kibuu arikia cukuru niandikiroo ministry of Public Work Mombasa kuria arutire wira nginyagia kurtaya gwake. Agoka na mucii arari murimi nigrua wa kahua na mahiu.">
+              When the late Harison Kibuu completed his studies, he was employed in the Ministry of Public Work Mombasa where he worked until his retirement. After his retirement, he went back home and started farming. He was a successful Coffee and Livestock farmer.
+            </p>
+          </div>
+          
+          <div class="event">
+            <h3 class="mutes" data-en="Church" data-ki="Kanitha">Church</h3>
+            <p class="muted" data-en="The late Harison Kibuu was baptized at P.C.E.A Ngamwa. He was later confirmed at P.C.E.A Ngamwa on 7/11/1982 by Rev. Eliphas N. Nkonge. He moved to P.C.E.A Kimuri where he was a member until his demise."
+               data-ki="Mutigairi Harison Kibuu abattihiritio kanithaini wa P.C.E.A Ngamwa. Niacokire akityukio kanithaini wa P.C.E.A Ngamwa mweri 7/11/1982 ni Rev. Eliphas N. Nkonge. Thutha ucio niahiamire kanithaini wa P.C.E.A Kimuri kuria arari murmurini nginyagia kuhuruka gwake.">
+              The late Harison Kibuu was baptized at P.C.E.A Ngamwa. He was later confirmed at P.C.E.A Ngamwa on 7/11/1982 by Rev. Eliphas N. Nkonge. He moved to P.C.E.A Kimuri where he was a member until his demise.
+            </p>
+          </div>
+          
+          <div class="event">
+            <h3 class="mutes" data-en="Marriage" data-ki="Kuhikania">Marriage</h3>
+            <p class="muted" data-en="The late Harison Kibuu met the love of his life, Alice Waruguru in the year 1985 and married through the Ugikuyu traditional marriage. They were blessed with children namely; John Gathumbi, Edwin Muchiri, Monicah Wangui and James Kabui."
+               data-ki="Mutigairi Harison Kibuu nimacemanirie na mwendwa wake Alice Waruguru mwakaini wa 1985 na makhikania na undurre wa Ugikuyu. Nimatanahitroo na ciana na nio; John Gathumbi , Edwin Muchiri, Monicah Wangui na James Kabui .">
+              The late Harison Kibuu met the love of his life, Alice Waruguru in the year 1985 and married through the Ugikuyu traditional marriage. They were blessed with children namely; John Gathumbi, Edwin Muchiri, Monicah Wangui and James Kabui.
+            </p>
+          </div>
+          
+          <div class="event">
+            <h3 class="mutes" data-en="Demise" data-ki="Kuhuruka">Demise</h3>
+            <p class="muted" data-en="On 1/12/2025 the late Harison Kibuu was involved in a road accident. He was rushed to Mukurweini Sub-county Hospital but passed away while receiving treatment. He died at the age of 67 years old. He has left behind his wife, children and grandchildren. IT IS THE GOD WHO GAVE US HARISON KIBUU AND IT IS HIM WHO HAS TAKEN HIM AWAY, THE NAME OF THE LORD BE PRAISED."
+               data-ki="Kuri mweri 1/12/2025 mutigairi Harison Kibuu niacemanirie na mutino wa barabara, akiguthwo ni gari na akihanyukio thibitari ya Mukurweini Sub-county Hospital kuria ahurukire akiamukira urigiti. Arahurukire ari na ukuru wa miaka mirongo itandatu na mugwanja (67 yrs). Niatiga Mutumia wake, ciana ciake na tuguka tuingi. NI MWATHANI WAHEANIRE HARISON KIBUU NA NOWE WAMUCO-KERA , RITWA RJAKE RIROGOCWO, AMEN.">
+              On 1/12/2025 the late Harison Kibuu was involved in a road accident. He was rushed to Mukurweini Sub-county Hospital but passed away while receiving treatment. He died at the age of 67 years old. He has left behind his wife, children and grandchildren. IT IS THE GOD WHO GAVE US HARISON KIBUU AND IT IS HIM WHO HAS TAKEN HIM AWAY, THE NAME OF THE LORD BE PRAISED.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Family Tribute -->
+      <div id="family-tributes" class="card fade-in" aria-label="Family Tributes">
+        <h3 style="margin-top:0">Family Tributes</h3>
+        <p class="muted">Tap each name to view their tribute message.</p>
+      
+        <div class="accordion">
+          <div class="accordion-item">
+            <button class="accordion-header">TRIBUTE FROM THE WIFE</button>
+            <div class="accordion-content">
+              <p>
+                My dear husband, losing you has left an emptiness in my heart that cannot be measured. You were my partner, my friend, and the one who stood by me through every season of life. Your kindness, strength, and quiet love helped build the home and life we shared. I am grateful for every moment, every laugh, and every challenge we overcame together. Even though you are no longer here with me, your love remains alive in my heart, and I will carry your memory with me for the rest of my days.
+              </p>
+            </div>
+          </div>
+      
+          <div class="accordion-item">
+            <button class="accordion-header">TRIBUTE FROM THE CHILDREN</button>
+            <div class="accordion-content">
+              <p>
+                Dad, our hearts are heavy as we say goodbye to you. You were our guide, our protector, and the person we looked up to every day. You taught us how to be strong, how to be kind, and how to love others with honesty and humility. We will always remember your laughter, your advice, and the way you made each of us feel special. Even though we wish you were still here, we are thankful for the love and lessons you left us. You will forever live in our hearts and in the people we become.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="hymns" class="card fade-in" aria-label="Hymns and Songs">
+        <h3 style="margin-top:0">Hymns & Songs</h3>
+        <p class="muted">Click a hymn to view the full lyrics.</p>
+      
+        <div class="accordion">
+          <div class="accordion-item">
+            <button class="accordion-header">JESU WE UNYENDETE (No. 35)</button>
+            <div class="accordion-content">
+              <p>
+                Jesu We unyendete, Ninguurira hari we:<br>
+                Riria mbaara ii nene, Nowe wa kuhonokia;<br>
+                Hitha mbaru-ini ciaku, Nii mundu muthini;<br>
+                Honokia Ngai wakwa Gutira muoyo wakwa.<br><br>
+
+                Wihitho wakwa nowe Na uru wakwa nowe;<br>
+                Ndikaingatwo hari we, Njoya unjitikiere;<br>
+                Nii ningwinokete, Nowe utethio wakwa<br>
+                O na mwigitio wakwa; Undoorerie thu ciakwa.<br><br>
+
+                Wega wothe ni waktu, Wohaniri no waku;<br>
+                Mwathani ndanyihiruo, Njihuria wega waku:<br>
+                Jesu ndakwamukira, We Githima kia muoyo;<br>
+                Theruka thimi wakwa Kinya tene na tene.
+              </p>
+            </div>
+          </div>
+      
+          <div class="accordion-item">
+            <button class="accordion-header">RUGENDO-INIRURU (No. 304)</button>
+            <div class="accordion-content">
+              <p>
+                Rugendo-ini ruru ruaguthii iguru<br>
+                Twarana na Mwathi Jesu Mogwati maingi, ndungi thii wi wiki<br>
+                Twarana na Mwathi Jesu<br><br>
+
+                Twarana nake, twarana nake<br>
+                Twarana na Mwathi Jesu<br>
+                Gwakorwo ni utuku kana ni muthenya<br>
+                Twarana na Mwathi Jesu<br><br>
+
+                Rugendo rwa guthii iguru ni rural-hu<br>
+                Twarana na Mwathi Jesu<br>
+                Ni tukahuruka twari kia rugendo<br>
+                Twarana na Mwathi Jesu<br><br>
+
+                Ni tuthondekiruo cilkaro iguru<br>
+                Twarana na Mwathi Jesu<br>
+                Twakinya iguru ni tukoona Mwathani<br>
+                Twarana na Mwathi Jesu<br><br>
+
+                Twatigia hanini twambate iguru<br>
+                Twarana na Mwathi Jesu<br>
+                Ni kuo tugaatuura tene o na tene<br>
+                Twarana na Mwathi Jesu
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gallery -->
+      <div id="gallery" class="card fade-in">
+        <h3 style="margin-top:0">Gallery — Precious Memories</h3>
+        <p class="muted">A few captured moments that tell his story of love, laughter, and grace.</p>
+
+        <div class="gallery-container">
+          <div class="gallery-grid">
+            <!-- Gallery images would go here -->
+            <div class="thumb" data-src="imges/srbs.jpg" title="Harison Kibuu">
+              <img src="imges\wedding.png" alt="Harison Kibuu smiling">
+            </div>
+            <div class="thumb" data-src="imges/srbs.jpg" title="Harison Kibuu">
+              <img src="imges\imagechurch.png" alt="Harison Kibuu at church">
+            </div>
+            <div class="thumb" data-src="imges/srbs.jpg" title="Harison Kibuu">
+              <img src="imges\img1.png" alt="Harison Kibuu portrait">
+            </div>
+            <div class="thumb" data-src="imges/srbs.jpg" title="Harison Kibuu">
+              <img src="imges\image3.png" alt="Harison Kibuu with family">
+            </div>
+            <div class="thumb" data-src="imges/srbs.jpg" title="Harison Kibuu">
+              <img src="imges\image2.png" alt="Harison Kibuu at work">
+            </div>
+            <div class="thumb" data-src="imges/srbs.jpg" title="Harison Kibuu">
+              <img src="imges\image01.png" alt="Harison Kibuu farming">
+            </div>
+            <!-- Add more gallery items as needed -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Expanded overlay -->
+      <div id="lightbox">
+        <img src="" alt="Expanded view">
+      </div>
+
+ <!-- Tribute Wall -->
+<div id="tributes" class="card fade-in">
+  <h3 style="margin-top:0">Tribute Wall</h3>
+  
+  <p class="muted">Leave your loving words, prayers, and memories in honor of Harison Kibuu.</p>
+  
+  <!-- Grid display for tributes -->
+  <div id="tributeGrid" class="tribute-grid"></div>
+  
+  <!-- See More Button -->
+  <div style="text-align: center; margin-top: 20px;">
+      <a href="tributes.html" class="btn">See More Tributes</a>
+  </div>
+  
+  <!-- Tribute Form -->
+  <form id="tributeForm" method="POST" data-netlify="true" onsubmit="return false;">
+      <div class="row" style="margin-bottom:8px">
+          <input id="name" placeholder="Your name">
+          <input id="relation" placeholder="Relationship (e.g., cousin, friend)">
+      </div>
+      <textarea id="message" placeholder="Write your tribute..."></textarea>
+      <div style="display:flex; gap:8px; margin-top:8px">
+          <button id="submitTribute" class="btn" type="button">Post Tribute</button>
+          <button id="clearAll" class="ghost" type="button">Clear Tributes</button>
+      </div>
+  </form>
+</div>
+      <!-- Program -->
+      <div id="program" class="card fade-in">
+        <h3 style="margin-top:0">Funeral Program</h3>
+        <a href="./public/Harison_Kibuu_Funeral_Program.pdf" 
+        download="Harison_Kibuu_Funeral_Program.pdf" 
+        class="download-btn" 
+        onclick="showDownloadMessage(event)">
+        Download Program
+        </a>
+     
+        <!-- Progress bar -->
+        <div id="downloadProgress" class="progress-container" style="display:none;">
+          <p>Download in progress...</p>
+          <div class="progress-bar">
+            <div class="progress-fill"></div>
+          </div>
+        </div>
+        <p class="muted">Thursday, 11th December 2025</p>
+
+        <h2>Funeral Programme for the Late HARISON KIBUU</h2>
+        <p><strong>Master of Ceremony:</strong> [To be announced]</p>
+        <p><strong>Transport Manager:</strong> [To be announced]</p>
+
+        <table border="1" cellspacing="0" cellpadding="8" style="width:100%; border-collapse:collapse; text-align:left;">
+          <thead style="background-color:#f2f2f2;">
+            <tr>
+              <th>Time</th>
+              <th>Activity</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>7:30 AM</td>
+              <td>Brief Prayers at Home</td>
+            </tr>
+            <tr>
+              <td>8:00 AM</td>
+              <td>Departure from Home</td>
+            </tr>
+            <tr>
+              <td>8:30 AM</td>
+              <td>Arrival at Mukurwe-ini Sub-County</td>
+            </tr>
+            <tr>
+              <td>9:00 AM</td>
+              <td>Viruary</td>
+            </tr>
+            <tr>
+              <td>9:30 AM</td>
+              <td>Viewing of the Body</td>
+            </tr>
+            <tr>
+              <td>10:00 AM</td>
+              <td>Departure from Mortuary</td>
+            </tr>
+            <tr>
+              <td>10:30 AM</td>
+              <td>Church Service Begins</td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <h3>Service Order</h3>
+        <ul>
+          <li>Hymn</li>
+          <li>Prayers</li>
+          <li>Resurrection Reading</li>
+          <li>Welcoming</li>
+          <li>Administration</li>
+          <li>Family Representative</li>
+          <li>Eulogy</li>
+          <li>Written Tributes</li>
+          <li>Choirs</li>
+          <li>Readings 1 & 2</li>
+          <li>Hymn</li>
+          <li>Sermon</li>
+          <li>Family Prayers</li>
+          <li>Vote of Thanks</li>
+          <li>Procession to the Grave Site</li>
+          <li>Final Prayers at Grave Site</li>
+          <li>Refreshments</li>
+        </ul>
+      </div>
+    </section>
+
+    <aside>
+      <div class="card fade-in" style="margin-top:14px">
+        <h3>Map & Directions</h3>
+        <p class="muted">Join us or visit the resting place of Harison Kibuu in Mukurwe-ini, Nyeri County.</p>
+
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.053811433775!2d37.03670777474832!3d-0.5035882352462016!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x18288c9c8e2c5a1f%3A0x8b1b7b7b7b7b7b7b!2sMukurwe-ini%2C%20Kenya!5e0!3m2!1sen!2ske!4v1733862400000!5m2!1sen!2ske"
+         width="300" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+         <a class="btn" target="_blank" href="https://maps.app.goo.gl/example" style="margin-top:8px;display:inline-block;">Get Directions on Google Maps</a>
+      </div>
+
+      <div class="card fade-in" style="margin-top:14px">
+        <h3>Appreciation</h3>
+        <p class="muted">On behalf of our entire team, we wish to sincerely thank the family and friends for trusting us to walk with you through this journey of laying your loved one to rest. It has been an honor to serve you during this difficult time.
+
+          To anyone who may need our services in the future, please do not hesitate to reach out to us - we are always ready to offer professional, compassionate, and dignified support.
+          
+          May the soul of Harison Kibuu rest in eternal peace.
+          
+          Thank you, and may God comfort and bless you all.
+          Shalom!
+          
+          Penjowa-M Productions  
+          
+          <a href="https://wa.me/254752404402?text=Hello%20Penjowa%2C%20tell%20me%20more%20about%20the%20e-eulogy.%20I%20am%20interested." 
+          target="_blank" 
+          class="whatsapp-btn">
+          Chat with Developer on WhatsApp
+          </a>
+        </p>
+      </div>
+    </aside>
+
+    <footer>
+      <small>made by sikasolutions · call +254 757568845</small>
+    </footer>
+    <canvas id="farewellCanvas"></canvas>
+  </main>
+    
+  <!-- Tribute JS remains unchanged -->
+  <script src="scriptt.js"></script>
+</body>
+</html>
